@@ -24,7 +24,7 @@ So far, you have to create the necessary HTML elements manually like this if you
 * syntax highlight
 
 ## Acknowlegment ##
-Well inspired by [Pen]{https://github.com/sofish/pen} by @sofish
+Well inspired by [Pen](https://github.com/sofish/pen) by [@sofish](https://github.com/sofish)
 
 ## License ##
 MIT
