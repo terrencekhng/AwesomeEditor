@@ -1,8 +1,7 @@
 AwesomeEditor
-
+=============
 Which focuses on smooth typing experience.
 
-=============
 
 ## How to use? ##
 So far, you have to create the necessary HTML elements manually like this if you want to use it in your page:
