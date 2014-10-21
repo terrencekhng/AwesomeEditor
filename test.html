@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Awesome Editor</title>
+
+  <link rel="stylesheet" type="text/css" href="styles/awesome_editor.css"/>
+  <style>
+    body {
+      background-color: #fff;
+      width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    @media all and (max-width: 1024px){
+      body {
+        width: 60%;
+      }
+    }
+
+    @media print {
+
+      .toolbar {
+        display: none;
+      }
+
+      body {
+        width: 94%;
+        padding-top: 1em;
+        font-size: 12px;
+      }
+    }
+  </style>
+
+</head>
+<body class="">
+
+<div class="awesome-editor" id="awesome-editor">
+<div contenteditable="true" id="editor-content" class="editor-content">
+  <b><p class="align-center">The C Programming Language</p></b>
+  <i><p class="align-center">Brian W. Kernighan Dennis M. Ritchie</p></i>
+  <b><p class="align-right">Introduction</p></b>
+  <br>
+  <p class="justified">
+    C is a general-purpose programming language. It has been closely associated with the UNIX system where it was developed, since both the system and most of the programs that runs on it are written in C. The language, however, is not tied to any one operating system or machine; and although it has been called a "system programming language" because it is useful for writing compilers and operating systems, it has been used equally well to write major programs in many different domains.
+  </p>
+</div>
+  <!--<div class="toolbar">
+    <ul class="items">
+      <li class="bold active">B</li>
+      <li class="italic">I</li>
+      <li class="underline">U</li>
+      <li class="font-size"><select class="font-size-select"><option value="1">14px</option><option value="2">18px</option> </select> </li>
+    </ul>
+  </div>-->
+</div>
+
+
+
+</body>
+
+<script src="js/awesome_editor.js"></script>
+
+</html>
