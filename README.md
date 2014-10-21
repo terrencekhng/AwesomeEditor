@@ -20,7 +20,7 @@ and include the javascript file and css file:
 <link rel="stylesheet" type="text/css" href="PATH_TO_awesome_editor.css" />
 
 <!--javascript-->
-<style src="PATH_TO_awesome_editor.js"></script>
+<script src="PATH_TO_awesome_editor.js"></script>
 ```
 
 
