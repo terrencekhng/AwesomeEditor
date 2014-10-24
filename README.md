@@ -20,14 +20,17 @@ and include the javascript file and css file:
 <link rel="stylesheet" type="text/css" href="PATH_TO_awesome_editor.css" />
 
 <!--javascript-->
+<script src="PATH_TO_appearance.js"></script>
+<script src="PATH_TO_toolbar.js"></script>
 <script src="PATH_TO_awesome_editor.js"></script>
 ```
 
 
 ## Features ##
 * bold, italic, underline
-(future)
 * align{left|center|right|justify}
+(in the future)
+* Modularize
 * Markdown
 * Import(html, plain text, lex)/Export(PDF, html, txt)
 * syntax highlight
