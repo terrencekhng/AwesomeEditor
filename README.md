@@ -1,6 +1,6 @@
 AwesomeEditor
 =============
-It's a WYSIWYG text editor Which focuses on smooth typing experience.
+It's a WYSIWYG text editor which focuses on smooth typing experience.
 
 
 ## How to use? ##
