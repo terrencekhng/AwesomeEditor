@@ -1,0 +1,24 @@
+{
+  "name": "AwesomeEditor",
+  "version": "0.0.0",
+  "description": "It's a WYSIWYG editor which focuses on smooth typing and processing experience.",
+  "main": "src/awesome_editor.js",
+  "keywords": [
+    "editor",
+    "WYSIWYG",
+    "markdown",
+    "Words"
+  ],
+  "authors": [
+    "Terence Ng"
+  ],
+  "license": "MIT",
+  "homepage": "http://hyaocuk.net/AwesomeEditor",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
