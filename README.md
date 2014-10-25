@@ -8,6 +8,7 @@ It's a WYSIWYG text editor which focuses on smooth typing and processing experie
 Node.js version greater than 0.8.0 is **required**!
 
 1 Install [Node.js](http://nodejs.org/)
+
 2 Fork the repo and enter the directory, and install dependencies using npm, and install [Grunt](http://gruntjs.com/):
   ```sh
   cd AwesomeEditor
