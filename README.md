@@ -1,6 +1,6 @@
 AwesomeEditor
 =============
-It's a WYSIWYG text editor which focuses on smooth typing experience.
+It's a WYSIWYG text editor which focuses on smooth typing and processing experience.
 
 [![Build Status](https://travis-ci.org/hyaocuk/AwesomeEditor.svg?branch=master)](https://travis-ci.org/hyaocuk/AwesomeEditor)
 
