@@ -37,7 +37,7 @@
   };
 
   utils.removeClass = function (el, klassname) {
-    if (el.className.length == 0) {
+    if (el.className.length === 0) {
       return;
     }
     if (el.className == klassname) {
@@ -70,7 +70,7 @@
     if (typeof(klassnames) === "string") {
       this.removeClass(el, klassnames);
       return 0;
-    } else if (klassnames.length != 0 && el.classList.length != 0) {
+    } else if (klassnames.length !== 0 && el.classList.length !== 0) {
       for (var i = 0; i < el.classList.length; ++i) {
         for (var j = 0; j < klassnames.length; ++j) {
           if (el.classList[i] == klassnames[j]) {

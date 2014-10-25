@@ -59,10 +59,10 @@
     toolbar.appendChild(items);
 
     for (var i = 0; i < this.configure.content.length; ++i) {
-      var item = utils.createElement("li", this.configure.content[i]["id"], this.configure.content[i]["cla"].join(" "));
+      var item = utils.createElement("li", this.configure.content[i].id, this.configure.content[i].cla.join(" "));
       //binding action using execCommand commands
-      item.setAttribute("action", this.configure.content[i]["action"]);
-      item.innerHTML = this.configure.content[i]["dis"];
+      item.setAttribute("action", this.configure.content[i].action);
+      item.innerHTML = this.configure.content[i].dis;
 
       items.appendChild(item);
 

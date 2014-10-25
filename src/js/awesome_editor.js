@@ -52,7 +52,7 @@
   };
 
   utils.removeClass = function (el, klassname) {
-    if (el.className.length == 0) {
+    if (el.className.length === 0) {
       return;
     }
     if (el.className == klassname) {
@@ -85,7 +85,7 @@
     if (typeof(klassnames) === "string") {
       this.removeClass(el, klassnames);
       return 0;
-    } else if (klassnames.length != 0 && el.classList.length != 0) {
+    } else if (klassnames.length !== 0 && el.classList.length !== 0) {
       for (var i = 0; i < el.classList.length; ++i) {
         for (var j = 0; j < klassnames.length; ++j) {
           if (el.classList[i] == klassnames[j]) {
@@ -208,7 +208,7 @@
   /*-- highlight2 for menu highlight */
   Awesome.prototype.highlight2 = function (elBegin, elEnd) {
     var toggle = function (off, el) {
-      if (off == true) {
+      if (off === true) {
         utils.addClass(el, "active");
       } else {
         utils.removeClass(el, "active");
@@ -316,7 +316,7 @@
    */
   Awesome.prototype.containNodes = function (startNode, endNode, outer, filter) {
     var nodes = [], current, same = false, endNodeParent;
-    if (startNode.length == 0 || endNode.length == 0) {
+    if (startNode.length === 0 || endNode.length === 0) {
       return nodes;
     } else if (startNode == endNode) {
       return nodes;
@@ -341,7 +341,7 @@
           if (node.nodeName.toLowerCase() == filter) {
             nodes.push(node);
           }
-          if (node.childNodes.length != 0) {
+          if (node.childNodes.length !== 0) {
             for (var i = 0; i < node.childNodes.length; ++i) {
               _iterate(node.childNodes[i]);
             }
@@ -352,8 +352,8 @@
       };
 
       /* iterate every sibling till reach the end node's outest parent before element range */
-      while (current.nextSibling != null) {
-        if (same == false) {
+      while (current.nextSibling !== null) {
+        if (same === false) {
           current = current.nextSibling;
           _iterate(current);
         } else {
@@ -366,7 +366,7 @@
   /* containNodes --*/
 
   Awesome.prototype.getSpecifiedEl = function (oriNode, nodeName) {
-    while (oriNode.nodeName.toLowerCase() !== nodeName && oriNode != null) {
+    while (oriNode.nodeName.toLowerCase() !== nodeName && oriNode !== null) {
       oriNode = oriNode.parentNode;
     }
     return oriNode;
@@ -385,15 +385,15 @@
       if (range.startContainer == range.endContainer) {
         var par = that.getSpecifiedEl(range.startContainer, "p");
         utils.removeMultiClasses(par, alignTypes);
-        if (utils.hasClass(par, _action) == false) {
+        if (utils.hasClass(par, _action) === false) {
           utils.addClass(par, _action);
         }
       } else {
         var _nodes = that.containNodes(range.startContainer, range.endContainer, that.editor, "p");
-        if (_nodes.length != 0) {
+        if (_nodes.length !== 0) {
           for (i = 0; i < _nodes.length; ++i) {
             utils.removeMultiClasses(_nodes[i], alignTypes);
-            if (utils.hasClass(_nodes[i], _action) == false) {
+            if (utils.hasClass(_nodes[i], _action) === false) {
               utils.addClass(_nodes[i], _action);
             }
           }

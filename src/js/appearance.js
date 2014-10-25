@@ -122,7 +122,7 @@
     if (this.configure.navbar) {
       var navbar = utils.createElement("div", "navbar", "navbar");
       if (this.configure.night) {
-        var navbarNight = utils.createElement("div", "")
+        var navbarNight = utils.createElement("div", "");
       }
       doc.body.appendChild(navbar);
       //doc.body.insertBefore(navbar, doc.body);
