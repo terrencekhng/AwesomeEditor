@@ -1,0 +1,30 @@
+{
+  "name": "AwesomeEditor",
+  "version": "0.0.1",
+  "main": "/src/awesome_editor.js",
+  "author": "Terence Ng",
+  "description": "It's a WYSIWYG editor which focuses on smooth typing and processing experience.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyaocuk/AwesomeEditor"
+  },
+  "keywords": [
+    "editor",
+    "WYSIWYG",
+    "markdown",
+    "Words"
+  ],
+  "license": {
+    "type": "MIT"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "scripts": {
+    "test": "grunt --verbose"
+  },
+  "readmeFilename": "README.md"
+}
