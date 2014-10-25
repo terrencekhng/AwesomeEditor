@@ -2,6 +2,7 @@ AwesomeEditor
 =============
 It's a WYSIWYG text editor which focuses on smooth typing experience.
 
+[![Build Status](https://travis-ci.org/hyaocuk/AwesomeEditor.svg?branch=master)](https://travis-ci.org/hyaocuk/AwesomeEditor)
 
 ## How to use? ##
 So far, you have to create the necessary HTML elements manually like this if you want to use it in your page:
