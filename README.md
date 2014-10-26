@@ -8,6 +8,11 @@ It's a WYSIWYG text editor which focuses on smooth typing and processing experie
 ![screenshot-night](http://i.imgur.com/JE8meAK.png)
 
 ## How to build ##
+For source code, fork it or use bower:
+```sh
+bower install awesome-editor
+```
+
 Node.js version greater than 0.8.0 is **required**!
 
 1 Install [Node.js](http://nodejs.org/)
