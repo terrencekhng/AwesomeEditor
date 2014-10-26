@@ -1,5 +1,5 @@
 {
-  "name": "AwesomeEditor",
+  "name": "awesome-editor",
   "version": "0.0.0",
   "description": "It's a WYSIWYG editor which focuses on smooth typing and processing experience.",
   "main": "src/awesome_editor.js",
