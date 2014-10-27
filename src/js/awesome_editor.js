@@ -2,6 +2,16 @@
  * Created by wujingheng on 2014/10/14.
  */
 
+/*
+ * Initial state:
+ * paragraph is using tag <p></p>
+ * each time you type return and start a new paragraph a new <p> is generated
+ *
+ * each newly created paragraph is align left              with class "align-left"
+ * each newly created paragraph font size is 22px          with class "font22"
+ * each newly created paragraph font type is Roboto-Slab   with class "Roboto-Slab"
+ * */
+
 (function (doc) {
   var Awesome, utils = {};
 
@@ -108,6 +118,9 @@
     //toolbar implementation
     this.toolbar();
 
+    //editor events
+    this.Actions();
+
   };
 
   /* toolbar */
@@ -126,7 +139,7 @@
       //alert(result);
     };
 
-    var displayDropdow = function (action, disp) {
+    var displayDropdown = function (action, disp) {
       switch (action) {
         case "toggle-font-size":
           if (disp) {
@@ -175,10 +188,10 @@
           case "toggle-font-size":
           case "toggle-font-type":
             utils.addClass(e.target, "toggle");
-            displayDropdow(action, true);
-            e.target.addEventListener("click", function(_e) {
-              //e.target.innerText = _e.target.innerText;
-              apply(_e.target.className);
+            displayDropdown(action, true);
+            e.target.addEventListener("click", function (_e) {
+              e.target.childNodes[0].nodeType == 3 ? e.target.childNodes[0].nodeValue = _e.target.innerText : "";
+              apply(_e.target.action);
             });
             break;
           default:
@@ -193,7 +206,7 @@
     });
 
     /* highlight toolbar action binding */
-    editor.addEventListener("mouseup", function() {
+    editor.addEventListener("mouseup", function () {
       highlight();
     });
 
@@ -247,34 +260,27 @@
         }
         /* highlight by classname */
         if (elBegin[i].className.split(" ")[0] == elEnd[j].className.split(" ")[0]) {
-          //var klassname = elBegin[i].className.split(" ")[0];
           var klassname = elBegin[i].className;
-          /*switch (klassname.trim()) {
-           case "align-right":
-           toggle(true, utils.getElement.byID("toolbar-align-right"));
-           break;
-           case "align-center":
-           toggle(true, utils.getElement.byID("toolbar-align-center"));
-           break;
-           case "align-left":
-           toggle(true, utils.getElement.byID("toolbar-align-left"));
-           break;
-           case "justified":
-           toggle(true, utils.getElement.byID("toolbar-justify"));
-           break;
-           }*/
           if (klassname.indexOf("align-right") != -1) {
             toggle(true, utils.getElement.byID("toolbar-align-right"));
-            break;
-          } else if (klassname.indexOf("align-center") != -1) {
+          }
+          if (klassname.indexOf("align-center") != -1) {
             toggle(true, utils.getElement.byID("toolbar-align-center"));
-            break;
-          } else if (klassname.indexOf("align-left") != -1) {
+          }
+          if (klassname.indexOf("align-left") != -1) {
             toggle(true, utils.getElement.byID("toolbar-align-left"));
-            break;
-          } else if (klassname.indexOf("justify") != -1) {
+          }
+          if (klassname.indexOf("line-through") != -1) {
+            toggle(true, utils.getElement.byID("toolbar-line-through"));
+          }
+          if (klassname.indexOf("justify") != -1) {
             toggle(true, utils.getElement.byID("toolbar-justify"));
-            break;
+          }
+          if (elBegin[i].getAttribute("font-size") != null) {
+            utils.getElement.byID("toolbar-font-type").childNodes[0].nodeType == 3 ? utils.getElement.byID("toolbar-font-size").childNodes[0].nodeValue = elBegin[i].getAttribute("font-size") : "";
+          }
+          if (elBegin[i].getAttribute("font-type") != null) {
+            utils.getElement.byID("toolbar-font-type").childNodes[0].nodeType == 3 ? utils.getElement.byID("toolbar-font-type").childNodes[0].nodeValue = elBegin[i].getAttribute("font-type") : "";
           }
         }
       }
@@ -376,29 +382,64 @@
 
   };
 
+  /* to be removed classes */
+  var alignTypes = ["align-center", "align-right", "justify", "align-left"];
+
   Awesome.prototype.actions = function (action) {
     var range = this.sel.getRangeAt(0);
-    var alignTypes = ["align-center", "align-right", "justify", "align-left"];
+
     var that = this;
 
-    var _setAlign = function (_action) {
+    var _takeAction = function (_action, klasses, target) {
       if (range.startContainer == range.endContainer) {
-        var par = that.getSpecifiedEl(range.startContainer, "p");
-        utils.removeMultiClasses(par, alignTypes);
+        var par = that.getSpecifiedEl(range.startContainer, target);
+        utils.removeMultiClasses(par, klasses);
         if (utils.hasClass(par, _action) === false) {
           utils.addClass(par, _action);
         }
       } else {
-        var _nodes = that.containNodes(range.startContainer, range.endContainer, that.editor, "p");
+        var _nodes = that.containNodes(range.startContainer, range.endContainer, that.editor, target);
         if (_nodes.length !== 0) {
-          for (i = 0; i < _nodes.length; ++i) {
-            utils.removeMultiClasses(_nodes[i], alignTypes);
+          for (var i = 0; i < _nodes.length; ++i) {
+            utils.removeMultiClasses(_nodes[i], klasses);
             if (utils.hasClass(_nodes[i], _action) === false) {
               utils.addClass(_nodes[i], _action);
             }
           }
         }
       }
+    };
+
+    var _takeAction2 = function (_action, target, attr) {
+      if (range.startContainer == range.endContainer) {
+        var par = that.getSpecifiedEl(range.startContainer, target);
+        //utils.removeMultiClasses(par, klasses);
+        /*if (utils.hasClass(par, _action) === false) {
+         utils.addClass(par, _action);
+         }*/
+        if (par.getAttribute(attr) == null || typeof (par.getAttribute(attr)) === "undefined") {
+          par.createAttribute(attr);
+        }
+        par.setAttribute(attr, _action);
+      } else {
+        var _nodes = that.containNodes(range.startContainer, range.endContainer, that.editor, target);
+        if (_nodes.length !== 0) {
+          for (var i = 0; i < _nodes.length; ++i) {
+            //utils.removeMultiClasses(_nodes[i], klasses);
+            /*if (utils.hasClass(_nodes[i], _action) === false) {
+             utils.addClass(_nodes[i], _action);
+             }*/
+            if (_nodes[i].getAttribute(attr) == null || typeof (_nodes[i].getAttribute(attr)) === "undefined") {
+              _nodes[i].createAttribute(attr);
+            }
+            _nodes[i].setAttribute(attr, _action);
+          }
+        }
+      }
+    };
+
+    var _takeActionInline = function (_action, klasses, target) {
+
     };
 
     switch (action) {
@@ -415,26 +456,56 @@
       case "align-center":
       case "align-right":
       case "justify":
-        _setAlign(action);
+      case "line-through":
+        _takeAction(action, alignTypes, "p");
         break;
-      case "font8":
-      case "font12":
-      case "font14":
-      case "font16":
-      case "font18":
-      case "font22":
-      case "font26":
-      case "font32":
-      case "font48":
-      case "font64":
-          _setAlign(action);
+      case "8px":
+      case "12px":
+      case "14px":
+      case "16px":
+      case "18px":
+      case "22px":
+      case "26px":
+      case "32px":
+      case "48px":
+      case "64px":
+        //_takeAction(action, fontsizeTypes, "p");
+        _takeAction2(action, "p", "font-size");
+        break;
+      case "Roboto-Slab":
+      case "Monaco":
+        //_takeAction(action, fonttypeTypes, "p");
+        _takeAction2(action, "p", "font-type");
         break;
       default:
         break;
     }
   };
 
-  var awesome = new Awesome(config);
+  Awesome.prototype.Actions = function() {
 
+    var _generateInitialParagraph = function(id, klass) {
+      var p = utils.createElement("p", id, klass);
+      if (typeof(arguments[2]) !== "undefined") {
+        var attr = arguments[2];
+        p.setAttribute("action", attr["action"]);
+        p.setAttribute("font-size", attr["font-size"]);
+        p.setAttribute("font-type", attr["font-type"]);
+      }
+
+      return p;
+    };
+
+    /* keyboard actions */
+    this.editor.addEventListener("keyup", function(e) {
+      /*if (e.which == 13) {
+        var newP = _generateInitialParagraph("", "align-left");
+        e.target.appendChild(newP);
+        newP.focus();
+      }*/
+    });
+  };
+
+  var awesome = new Awesome(config);
 
 })(document);
