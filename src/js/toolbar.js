@@ -16,6 +16,7 @@
       {cla: ["bold", "icon-bold"], dis: "", id: "toolbar-bold", action: "bold"},
       {cla: ["italic", "icon-italic"], dis: "", id: "toolbar-italic", action: "italic"},
       {cla: ["underline", "icon-underline"], dis: "", id: "toolbar-underline", action: "underline"},
+      {cla: ["line-through", "icon-line-through"], dis: "abc", id: "toolbar-line-through", action: "line-through"},
       {cla: ["align-left", "icon-align-left"], dis: "", id: "toolbar-align-left", action: "align-left"},
       {cla: ["align-center", "icon-align-center"], dis: "", id: "toolbar-align-center", action: "align-center"},
       {cla: ["align-right", "icon-align-right"], dis: "", id: "toolbar-align-right", action: "align-right"},
@@ -75,12 +76,12 @@
     // setup html content
     utils.getElement.byID("toolbar-font-size").innerHTML += "<b class=\"caret\"></b>";
     /* dropdown menu */
-    utils.getElement.byID("toolbar-font-size").innerHTML += "<ul id=\"font-size-options\" class=\"font-size-options dropdown-menu\"><li class=\"font8\">8px</li><li class=\"font12\">12px</li><li class=\"font14\">14px</li><li class=\"font16\">16px</li><li class=\"font18\">18px</li><li class=\"font22\">22px</li><li class=\"font26\">26px</li><li class=\"font32\">32px</li><li class=\"font48\">48px</li><li class=\"font64\">64px</li></ul>";
+    utils.getElement.byID("toolbar-font-size").innerHTML += "<ul id=\"font-size-options\" class=\"font-size-options dropdown-menu\"><li action=\"8px\">8px</li><li action=\"12px\">12px</li><li action=\"14px\">14px</li><li action=\"16px\">16px</li><li action=\"18px\">18px</li><li action=\"22px\">22px</li><li action=\"26px\">26px</li><li action=\"32px\">32px</li><li action=\"48px\">48px</li><li action=\"64px\">64px</li></ul>";
 
     /* font-type selector */
     // setup html content
     utils.getElement.byID("toolbar-font-type").innerHTML += "<b class=\"caret\"></b>";
-   utils.getElement.byID("toolbar-font-type").innerHTML += "<ul id=\"font-type-options\" class=\"font-type-options dropdown-menu\"><li class=\"Roboto-Slab\">Roboto Slab</li><li class=\"Monaco\">Monaco</li></ul>";
+   utils.getElement.byID("toolbar-font-type").innerHTML += "<ul id=\"font-type-options\" class=\"font-type-options dropdown-menu\"><li action=\"Roboto-Slab\">Roboto Slab</li><li action=\"Monaco\">Monaco</li></ul>";
 
   };
 
