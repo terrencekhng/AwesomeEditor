@@ -3,7 +3,7 @@ body {
 }
 
 p {
-  margin: 0;
+  margin: 12px 0;
 }
 
 .night {
@@ -197,9 +197,14 @@ p {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #cdcdcd;
-  border-radius: 0px;
+  border-radius: 0;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.night .dropdown-menu {
+  background-color: #373737;
+  border-color: #696969;
 }
 
 .dropdown-menu li {
@@ -216,54 +221,80 @@ p {
   background-color: #b94800;
 }
 
-.font-size-options [class^="font"] {
+.font-size-options li {
   line-height: 1em;
 }
 
+.font-size-options [action="8px"],
+[font-size="8px"],
 .font8 {
   font-size: 8px;
 }
 
+.font-size-options [action="12px"],
+[font-size="12px"],
 .font12 {
   font-size: 12px;
 }
 
+.font-size-options [action="14px"],
+[font-size="14px"],
 .font14 {
   font-size: 14px;
 }
 
+.font-size-options [action="16px"],
+[font-size="16px"],
 .font16 {
   font-size: 16px;
 }
 
+.font-size-options [action="18px"],
+[font-size="18px"],
 .font18 {
   font-size: 18px;
 }
 
+.font-size-options [action="22px"],
+[font-size="22px"],
 .font22 {
   font-size: 22px;
 }
 
+.font-size-options [action="26px"],
+[font-size="26px"],
 .font26 {
   font-size: 26px;
 }
 
+.font-size-options [action="32px"],
+[font-size="32px"],
 .font32 {
   font-size: 32px;
 }
 
+.font-size-options [action="48px"],
+[font-size="48px"],
 .font48 {
   font-size: 48px;
 }
 
+.font-size-options [action="64px"],
+[font-size="64px"],
 .font64 {
   font-size: 64px;
 }
 
 /*--font-type--*/
+
+.font-type-options [action="Roboto-Slab"],
+[font-type="Roboto-Slab"],
 .Roboto-Slab {
   font-family: "Roboto Slab";
 }
+
+.font-type-options [action="Monaco"],
+[font-type="Monaco"],
 .Monaco {
   font-family: Monaco;
 }
@@ -284,6 +315,11 @@ p {
 .underline,
 .toolbar .underline {
   text-decoration: underline;
+}
+
+.line-through,
+.toolbar .line-through {
+  text-decoration: line-through;
 }
 
 .align-left {
