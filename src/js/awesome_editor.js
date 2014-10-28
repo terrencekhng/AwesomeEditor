@@ -127,14 +127,14 @@
   Awesome.prototype.toolbar = function () {
     var editor = this.editor;
     var items = this.items;
-    var that = this;
+    var self = this;
 
     var highlight = function () {
-      var range = that.sel.getRangeAt(0);
-      that._range = that.sel.getRangeAt(0);
-      that.highlight2(that._effectNode(range.startContainer), that._effectNode(range.endContainer));
+      var range = self.sel.getRangeAt(0);
+      self._range = self.sel.getRangeAt(0);
+      self.highlight2(self._effectNode(range.startContainer), self._effectNode(range.endContainer));
 
-      //alert(that._effectNode(range.startContainer));
+      //alert(self._effectNode(range.startContainer));
 
       //alert(result);
     };
@@ -165,25 +165,25 @@
       if (!action) return;
 
       var apply = function () {
-        that.sel.removeAllRanges();
-        that.sel.addRange(that._range);
+        self.sel.removeAllRanges();
+        self.sel.addRange(self._range);
         if (typeof(arguments[0]) !== "undefined") {
-          that.actions(arguments[0]);
+          self.actions(arguments[0]);
         } else {
-          that.actions(action);
+          self.actions(action);
         }
-        that._range = that.sel.getRangeAt(0);
+        self._range = self.sel.getRangeAt(0);
       };
 
 
       if (utils.hasClass(e.target, "active")) {
         utils.removeClass(e.target, "active");
-        that._clearScreen();
+        self._clearScreen();
       } else if (utils.hasClass(e.target, "toggle")) {
         utils.removeClass(e.target, "toggle");
-        that._clearScreen();
+        self._clearScreen();
       } else {
-        that._clearScreen();
+        self._clearScreen();
         switch (action) {
           case "toggle-font-size":
           case "toggle-font-type":
@@ -212,7 +212,7 @@
 
     /* click other area to clean screen */
     editor.addEventListener("click", function () {
-      that._clearScreen();
+      self._clearScreen();
     });
 
   };
@@ -313,14 +313,14 @@
     return nodes;
   };
 
-  /*-- containNodes - list all nodes that below start node and above end node
+  /*-- containNodes - list all nodes self below start node and above end node
    * @params: {startNode} - upper bound node
    *          {endNode}   - lower bound node
    *          {outer}     - search range should not exceed outer node
    *          {filter}    - filter nodes which do not have the target node name
    * @ret:    {nodes}     - specific nodes between startNode and endNode
    */
-  Awesome.prototype.containNodes = function (startNode, endNode, outer, filter) {
+  Awesome.prototype.containNodes = function (startNode, endNode, outer) {
     var nodes = [], current, same = false, endNodeParent;
     if (startNode.length === 0 || endNode.length === 0) {
       return nodes;
@@ -328,10 +328,19 @@
       return nodes;
     } else {
 
-      /* get the node's outest element before outer element{outer} range */
+      var filter = "";
+      if (typeof(arguments[3]) !== "undefined") {
+        filter = arguments[3];
+      }
+
+      /* get the node's outest element before breaching outer element{outer} range */
       current = startNode;
       while (current.parentNode != outer) {
-        if (current.nodeName.toLowerCase() == filter) {
+        if (filter !== "") {
+          if (current.nodeName.toLowerCase() == filter) {
+            nodes.push(current);
+          }
+        } else {
           nodes.push(current);
         }
         current = current.parentNode;
@@ -344,7 +353,11 @@
       /* iterate every child nodes and find the one applys to filter{filter} */
       var _iterate = function (node) {
         if (node != endNode) {
-          if (node.nodeName.toLowerCase() == filter) {
+          if (filter !== "") {
+            if (node.nodeName.toLowerCase() == filter) {
+              nodes.push(node);
+            }
+          } else {
             nodes.push(node);
           }
           if (node.childNodes.length !== 0) {
@@ -388,17 +401,17 @@
   Awesome.prototype.actions = function (action) {
     var range = this.sel.getRangeAt(0);
 
-    var that = this;
+    var self = this;
 
     var _takeAction = function (_action, klasses, target) {
       if (range.startContainer == range.endContainer) {
-        var par = that.getSpecifiedEl(range.startContainer, target);
+        var par = self.getSpecifiedEl(range.startContainer, target);
         utils.removeMultiClasses(par, klasses);
         if (utils.hasClass(par, _action) === false) {
           utils.addClass(par, _action);
         }
       } else {
-        var _nodes = that.containNodes(range.startContainer, range.endContainer, that.editor, target);
+        var _nodes = self.containNodes(range.startContainer, range.endContainer, self.editor, target);
         if (_nodes.length !== 0) {
           for (var i = 0; i < _nodes.length; ++i) {
             utils.removeMultiClasses(_nodes[i], klasses);
@@ -412,7 +425,7 @@
 
     var _takeAction2 = function (_action, target, attr) {
       if (range.startContainer == range.endContainer) {
-        var par = that.getSpecifiedEl(range.startContainer, target);
+        var par = self.getSpecifiedEl(range.startContainer, target);
         //utils.removeMultiClasses(par, klasses);
         /*if (utils.hasClass(par, _action) === false) {
          utils.addClass(par, _action);
@@ -422,7 +435,7 @@
         }
         par.setAttribute(attr, _action);
       } else {
-        var _nodes = that.containNodes(range.startContainer, range.endContainer, that.editor, target);
+        var _nodes = self.containNodes(range.startContainer, range.endContainer, self.editor, target);
         if (_nodes.length !== 0) {
           for (var i = 0; i < _nodes.length; ++i) {
             //utils.removeMultiClasses(_nodes[i], klasses);
@@ -438,19 +451,22 @@
       }
     };
 
-    var _takeActionInline = function (_action, klasses, target) {
-
+    var _takeActionInline = function (_action) {
+      /*var span = utils.createElement("span", "", _action);
+      range.surroundContents(span);*/
+      alert(self.containNodes(range.startContainer, range.endContainer, self.editor));
     };
 
     switch (action) {
       case "bold":
       case "italic":
       case "underline":
-        if (doc.execCommand(action, false)) {
+        /*if (doc.execCommand(action, false)) {
           utils.log("success to execute command!\n");
         } else {
           utils.log("failed to execute command: " + action);
-        }
+        }*/
+          _takeActionInline(action);
         break;
       case "align-left":
       case "align-center":
@@ -460,14 +476,14 @@
         _takeAction(action, alignTypes, "p");
         break;
       case "8px":
-      case "12px":
-      case "14px":
-      case "16px":
-      case "18px":
       case "22px":
+      case "12px":
       case "26px":
+      case "14px":
       case "32px":
+      case "16px":
       case "48px":
+      case "18px":
       case "64px":
         //_takeAction(action, fontsizeTypes, "p");
         _takeAction2(action, "p", "font-size");
@@ -482,9 +498,9 @@
     }
   };
 
-  Awesome.prototype.Actions = function() {
+  Awesome.prototype.Actions = function () {
 
-    var _generateInitialParagraph = function(id, klass) {
+    var _generateInitialParagraph = function (id, klass) {
       var p = utils.createElement("p", id, klass);
       if (typeof(arguments[2]) !== "undefined") {
         var attr = arguments[2];
@@ -497,12 +513,12 @@
     };
 
     /* keyboard actions */
-    this.editor.addEventListener("keyup", function(e) {
+    this.editor.addEventListener("keyup", function (e) {
       /*if (e.which == 13) {
-        var newP = _generateInitialParagraph("", "align-left");
-        e.target.appendChild(newP);
-        newP.focus();
-      }*/
+       var newP = _generateInitialParagraph("", "align-left");
+       e.target.appendChild(newP);
+       newP.focus();
+       }*/
     });
   };
 
