@@ -190,7 +190,9 @@
             utils.addClass(e.target, "toggle");
             displayDropdown(action, true);
             e.target.addEventListener("click", function (_e) {
-              e.target.childNodes[0].nodeType == 3 ? e.target.childNodes[0].nodeValue = _e.target.innerText : "";
+              if (e.target.childNodes[0] == 3) {
+                e.target.childNodes[0].nodeValue = _e.target.innerText;
+              }
               apply(_e.target.action);
             });
             break;
@@ -276,11 +278,15 @@
           if (klassname.indexOf("justify") != -1) {
             toggle(true, utils.getElement.byID("toolbar-justify"));
           }
-          if (elBegin[i].getAttribute("font-size") != null) {
-            utils.getElement.byID("toolbar-font-type").childNodes[0].nodeType == 3 ? utils.getElement.byID("toolbar-font-size").childNodes[0].nodeValue = elBegin[i].getAttribute("font-size") : "";
+          if (elBegin[i].getAttribute("font-size") !== null) {
+            if (utils.getElement.byID("toolbar-font-type").childNodes[0].nodeType == 3) {
+              utils.getElement.byID("toolbar-font-size").childNodes[0].nodeValue = elBegin[i].getAttribute("font-size");
+            }
           }
-          if (elBegin[i].getAttribute("font-type") != null) {
-            utils.getElement.byID("toolbar-font-type").childNodes[0].nodeType == 3 ? utils.getElement.byID("toolbar-font-type").childNodes[0].nodeValue = elBegin[i].getAttribute("font-type") : "";
+          if (elBegin[i].getAttribute("font-type") !== null) {
+            if (utils.getElement.byID("toolbar-font-type").childNodes[0].nodeType == 3) {
+              utils.getElement.byID("toolbar-font-type").childNodes[0].nodeValue = elBegin[i].getAttribute("font-type");
+            }
           }
         }
       }
@@ -430,7 +436,7 @@
         /*if (utils.hasClass(par, _action) === false) {
          utils.addClass(par, _action);
          }*/
-        if (par.getAttribute(attr) == null || typeof (par.getAttribute(attr)) === "undefined") {
+        if (par.getAttribute(attr) === null || typeof (par.getAttribute(attr)) === "undefined") {
           par.createAttribute(attr);
         }
         par.setAttribute(attr, _action);
@@ -442,7 +448,7 @@
             /*if (utils.hasClass(_nodes[i], _action) === false) {
              utils.addClass(_nodes[i], _action);
              }*/
-            if (_nodes[i].getAttribute(attr) == null || typeof (_nodes[i].getAttribute(attr)) === "undefined") {
+            if (_nodes[i].getAttribute(attr) === null || typeof (_nodes[i].getAttribute(attr)) === "undefined") {
               _nodes[i].createAttribute(attr);
             }
             _nodes[i].setAttribute(attr, _action);
@@ -504,7 +510,7 @@
       var p = utils.createElement("p", id, klass);
       if (typeof(arguments[2]) !== "undefined") {
         var attr = arguments[2];
-        p.setAttribute("action", attr["action"]);
+        p.setAttribute("action", attr.action);
         p.setAttribute("font-size", attr["font-size"]);
         p.setAttribute("font-type", attr["font-type"]);
       }
