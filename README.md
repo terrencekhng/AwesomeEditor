@@ -70,5 +70,5 @@ and include the javascript file and css file:
 Well inspired by [Pen](https://github.com/sofish/pen) by [@sofish](https://github.com/sofish)
 
 ## License ##
-MIT
+[MIT](http://opensource.org/licenses/MIT)
 
